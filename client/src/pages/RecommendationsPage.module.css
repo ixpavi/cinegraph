@@ -133,8 +133,3 @@
   gap: var(--space-5);
 }
 
-.recWhy {
-  font-size: 0.72rem;
-  color: var(--teal);
-  margin-top: 2px;
-}

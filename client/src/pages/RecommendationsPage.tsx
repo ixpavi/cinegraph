@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { api } from "../api/client";
 import { useAsync } from "../lib/useAsync";
 import { LoadingState, ErrorState, EmptyState } from "../components/States";
-import { GenreChip } from "../components/GenreChip";
+import { RecommendationCard } from "../components/RecommendationCard";
 import { posterStyle, initials } from "../lib/poster";
 import styles from "./RecommendationsPage.module.css";
 
@@ -88,44 +88,7 @@ export function RecommendationsPage() {
             {recs.status === "success" && recs.data.length > 0 && (
               <div className={styles.recGrid}>
                 {recs.data.map((rec) => (
-                  <Link key={rec.id} to={`/movies/${rec.id}`} style={{ display: "block" }}>
-                    <div
-                      style={{
-                        borderRadius: "var(--radius-md)",
-                        overflow: "hidden",
-                        border: "1px solid var(--surface-border)",
-                        background: "var(--surface-1)",
-                      }}
-                    >
-                      <div
-                        style={{
-                          aspectRatio: "2 / 3",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontFamily: "var(--font-display)",
-                          fontSize: "2rem",
-                          fontWeight: 600,
-                          color: "rgba(244,237,225,0.92)",
-                          ...posterStyle(rec.id),
-                        }}
-                      >
-                        {initials(rec.title)}
-                      </div>
-                      <div style={{ padding: "12px 14px 14px" }}>
-                        <div style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}>{rec.title}</div>
-                        <div className={styles.recWhy}>
-                          Liked by {rec.neighbourSupport} similar viewer{rec.neighbourSupport === 1 ? "" : "s"} ·
-                          avg {rec.avgNeighbourScore.toFixed(1)}★
-                        </div>
-                        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8 }}>
-                          {rec.genres.slice(0, 2).map((g) => (
-                            <GenreChip key={g} genre={g} />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
+                  <RecommendationCard key={rec.id} rec={rec} />
                 ))}
               </div>
             )}
