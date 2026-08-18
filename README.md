@@ -228,13 +228,38 @@ ORDER BY score DESC, avgRating DESC
 filtering, three hops out from the target user:
 
 ```cypher
-MATCH (u:User {id: $userId})-[ur:RATED]->(seen:Movie) WHERE ur.score >= 4
+MATCH (u:User {id: $userId})
+OPTIONAL MATCH (u)-[:RATED]->(alreadySeen:Movie)
+WITH u, collect(alreadySeen.id) AS seenIds
+MATCH (u)-[ur:RATED]->(seen:Movie) WHERE ur.score >= 4
 MATCH (neighbour:User)-[nr:RATED]->(seen) WHERE neighbour.id <> u.id AND nr.score >= 4
 MATCH (neighbour)-[rec:RATED]->(recommended:Movie)
-WHERE rec.score >= 4 AND NOT EXISTS { MATCH (u)-[:RATED]->(recommended) }
+WHERE rec.score >= 4 AND NOT recommended.id IN seenIds
 WITH recommended, count(DISTINCT neighbour) AS neighbourSupport, avg(rec.score) AS avgNeighbourScore
 ...
 ORDER BY neighbourSupport DESC, avgNeighbourScore DESC
+```
+
+> **A CognoDB-specific quirk found during testing:** the first version of
+> this query excluded already-seen movies with `NOT EXISTS { MATCH
+> (u)-[:RATED]->(recommended) }` — valid openCypher that works correctly
+> on stock Neo4j, and passed every test against a local Neo4j 5 instance.
+> Against the real CognoDB instance it silently over-matched and excluded
+> *every* candidate, dropping recommendations to zero with no error. I
+> found this by re-running the same request against both databases and
+> bisecting the query clause by clause (see the debug trace below). The
+> fix — collecting already-rated movie ids into a list first and filtering
+> with `NOT ... IN list` — avoids the correlated-subquery form entirely
+> and is portable across openCypher implementations. It's a good example
+> of why this assignment specifically asks you to test against the real
+> managed instance rather than any local Neo4j stand-in.
+
+```
+step1 seen count (score >= 4):        9
+step2 taste-neighbour count:          5
+step3 candidates before exclusion:    77 rows / 27 distinct movies
+step4a NOT EXISTS{} filter:           0   ← bug: over-excluded everything
+step4b NOT ... IN seenIds filter:     18  ← correct
 ```
 
 **Browse/search** (`listMovies`) — a more ordinary query included for

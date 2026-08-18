@@ -33,6 +33,11 @@ export function posterStyle(seed: string) {
 
 export function initials(title: string): string {
   const words = title.replace(/^(The|A|An)\s+/i, "").split(/\s+/).filter(Boolean);
-  const chars = words.slice(0, 2).map((w) => w[0]?.toUpperCase() ?? "");
-  return chars.join("") || title.slice(0, 2).toUpperCase();
+  if (words.length >= 2) {
+    return words
+      .slice(0, 2)
+      .map((w) => w[0]?.toUpperCase() ?? "")
+      .join("");
+  }
+  return (words[0] ?? title).slice(0, 3).toUpperCase();
 }

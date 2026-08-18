@@ -35,14 +35,15 @@ export async function getUserRatings(userId) {
  */
 export async function getRecommendationsForUser(userId, limit = 10) {
   const cypher = `
-    MATCH (u:User {id: $userId})-[ur:RATED]->(seen:Movie)
+    MATCH (u:User {id: $userId})
+    OPTIONAL MATCH (u)-[:RATED]->(alreadySeen:Movie)
+    WITH u, collect(alreadySeen.id) AS seenIds
+    MATCH (u)-[ur:RATED]->(seen:Movie)
     WHERE ur.score >= 4
     MATCH (neighbour:User)-[nr:RATED]->(seen)
     WHERE neighbour.id <> u.id AND nr.score >= 4
     MATCH (neighbour)-[rec:RATED]->(recommended:Movie)
-    WHERE rec.score >= 4 AND NOT EXISTS {
-      MATCH (u)-[:RATED]->(recommended)
-    }
+    WHERE rec.score >= 4 AND NOT recommended.id IN seenIds
     WITH recommended, count(DISTINCT neighbour) AS neighbourSupport, avg(rec.score) AS avgNeighbourScore
     OPTIONAL MATCH (recommended)-[:IN_GENRE]->(g:Genre)
     RETURN recommended { .* } AS movie,
