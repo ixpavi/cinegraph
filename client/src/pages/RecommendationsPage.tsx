@@ -4,6 +4,7 @@ import { api } from "../api/client";
 import { useAsync } from "../lib/useAsync";
 import { LoadingState, ErrorState, EmptyState } from "../components/States";
 import { RecommendationCard } from "../components/RecommendationCard";
+import { Poster } from "../components/Poster";
 import { posterStyle, initials } from "../lib/poster";
 import styles from "./RecommendationsPage.module.css";
 
@@ -65,10 +66,19 @@ export function RecommendationsPage() {
               <div className={styles.ratedList}>
                 {ratings.data.map((r) => (
                   <Link key={r.id} to={`/movies/${r.id}`} className={styles.ratedRow}>
-                    <span className={styles.ratedTitle}>
-                      {r.title} <span className={styles.ratedYear}>{r.year}</span>
+                    <Poster
+                      id={r.id}
+                      title={r.title}
+                      posterUrl={r.posterUrl}
+                      className={styles.ratedPoster}
+                      initialsClassName={styles.ratedPosterInitials}
+                    />
+                    <span className={styles.ratedInfo}>
+                      <span className={styles.ratedTitle}>
+                        {r.title} <span className={styles.ratedYear}>{r.year}</span>
+                      </span>
+                      <span className={styles.score}>{r.score.toFixed(1)}★</span>
                     </span>
-                    <span className={styles.score}>{r.score.toFixed(1)}★</span>
                   </Link>
                 ))}
               </div>

@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 import type { Recommendation } from "../api/types";
-import { posterStyle, initials } from "../lib/poster";
+import { Poster } from "./Poster";
 import { GenreChip } from "./GenreChip";
 import styles from "./MovieCard.module.css";
 
 export function RecommendationCard({ rec }: { rec: Recommendation }) {
   return (
     <Link to={`/movies/${rec.id}`} className={styles.card}>
-      <div className={styles.poster} style={posterStyle(rec.id)}>
-        <span className={styles.posterInitials}>{initials(rec.title)}</span>
-      </div>
+      <Poster
+        id={rec.id}
+        title={rec.title}
+        posterUrl={rec.posterUrl}
+        className={styles.poster}
+        initialsClassName={styles.posterInitials}
+      />
       <div className={styles.body}>
         <h3 className={styles.title}>{rec.title}</h3>
         <p className={styles.meta} style={{ color: "var(--teal)" }}>

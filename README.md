@@ -74,7 +74,7 @@ graph LR
 
 | Label      | Key properties                          |
 |------------|------------------------------------------|
-| `Movie`    | `id`, `title`, `year`, `runtime`, `plot`  |
+| `Movie`    | `id`, `title`, `year`, `runtime`, `plot`, `posterUrl` |
 | `Person`   | `id`, `name`                              |
 | `Genre`    | `name`                                    |
 | `Studio`   | `name`                                    |
@@ -93,6 +93,15 @@ graph LR
 Uniqueness constraints on `Movie.id`, `Person.id`, `Genre.name`,
 `Studio.name` and `User.id` keep the seed script idempotent (`MERGE`
 throughout — rerunning it never duplicates data).
+
+Poster art (`Movie.posterUrl`) is real theatrical poster imagery resolved
+once via [TMDB](https://www.themoviedb.org/)'s search API and stored as
+plain CDN URLs in `server/src/seed/data/posters.js` — the deployed app
+never calls TMDB directly (no API key at runtime), it just hotlinks the
+resulting `image.tmdb.org` URLs. The frontend (`client/src/components/
+Poster.tsx`) falls back to a generated gradient-and-initials placeholder
+if a poster URL is missing or fails to load, so a broken image never
+reaches the UI.
 
 ## Screenshots
 

@@ -1,16 +1,21 @@
 import { Link } from "react-router-dom";
 import type { MovieSummary } from "../api/types";
-import { posterStyle, initials } from "../lib/poster";
+import { Poster } from "./Poster";
 import { GenreChip } from "./GenreChip";
 import styles from "./MovieCard.module.css";
 
 export function MovieCard({ movie }: { movie: MovieSummary }) {
   return (
     <Link to={`/movies/${movie.id}`} className={styles.card}>
-      <div className={styles.poster} style={posterStyle(movie.id)}>
-        <span className={styles.posterInitials}>{initials(movie.title)}</span>
+      <Poster
+        id={movie.id}
+        title={movie.title}
+        posterUrl={movie.posterUrl}
+        className={styles.poster}
+        initialsClassName={styles.posterInitials}
+      >
         <span className={styles.posterYear}>{movie.year}</span>
-      </div>
+      </Poster>
       <div className={styles.body}>
         <h3 className={styles.title}>{movie.title}</h3>
         <div className={styles.meta}>

@@ -78,7 +78,10 @@
 }
 
 .filmCard {
-  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2);
   border-radius: var(--radius-md);
   background: var(--surface-1);
   border: 1px solid var(--surface-border);
@@ -86,6 +89,24 @@
 
 .filmCard:hover {
   border-color: var(--gold-dim);
+}
+
+.filmPoster {
+  width: 42px;
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.filmPosterInitials {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: rgba(244, 237, 225, 0.92);
 }
 
 .filmTitle {

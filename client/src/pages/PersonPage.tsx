@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../api/client";
 import { useAsync } from "../lib/useAsync";
 import { LoadingState, ErrorState, EmptyState } from "../components/States";
+import { Poster } from "../components/Poster";
 import { posterStyle, initials } from "../lib/poster";
 import styles from "./PersonPage.module.css";
 
@@ -47,8 +48,17 @@ export function PersonPage() {
           <div className={styles.filmGrid}>
             {p.directed.map((f) => (
               <Link key={f.id} to={`/movies/${f.id}`} className={styles.filmCard}>
-                <div className={styles.filmTitle}>{f.title}</div>
-                <div className={styles.filmMeta}>{f.year}</div>
+                <Poster
+                  id={f.id}
+                  title={f.title}
+                  posterUrl={f.posterUrl}
+                  className={styles.filmPoster}
+                  initialsClassName={styles.filmPosterInitials}
+                />
+                <span>
+                  <div className={styles.filmTitle}>{f.title}</div>
+                  <div className={styles.filmMeta}>{f.year}</div>
+                </span>
               </Link>
             ))}
           </div>
@@ -61,10 +71,19 @@ export function PersonPage() {
           <div className={styles.filmGrid}>
             {p.actedIn.map((f) => (
               <Link key={f.id} to={`/movies/${f.id}`} className={styles.filmCard}>
-                <div className={styles.filmTitle}>{f.title}</div>
-                <div className={styles.filmMeta}>
-                  {f.year} · {f.role}
-                </div>
+                <Poster
+                  id={f.id}
+                  title={f.title}
+                  posterUrl={f.posterUrl}
+                  className={styles.filmPoster}
+                  initialsClassName={styles.filmPosterInitials}
+                />
+                <span>
+                  <div className={styles.filmTitle}>{f.title}</div>
+                  <div className={styles.filmMeta}>
+                    {f.year} · {f.role}
+                  </div>
+                </span>
               </Link>
             ))}
           </div>

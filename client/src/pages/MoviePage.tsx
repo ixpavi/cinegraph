@@ -4,6 +4,7 @@ import { useAsync } from "../lib/useAsync";
 import { LoadingState, ErrorState, EmptyState } from "../components/States";
 import { GenreChip } from "../components/GenreChip";
 import { MovieCard } from "../components/MovieCard";
+import { Poster } from "../components/Poster";
 import { posterStyle, initials } from "../lib/poster";
 import styles from "./MoviePage.module.css";
 
@@ -24,9 +25,13 @@ export function MoviePage() {
         ← Back to browse
       </Link>
       <div className={styles.hero}>
-        <div className={styles.poster} style={posterStyle(m.id)}>
-          <span className={styles.posterInitials}>{initials(m.title)}</span>
-        </div>
+        <Poster
+          id={m.id}
+          title={m.title}
+          posterUrl={m.posterUrl}
+          className={styles.poster}
+          initialsClassName={styles.posterInitials}
+        />
         <div className={styles.info}>
           <h1 className={styles.title}>{m.title}</h1>
           <div className={styles.metaRow}>

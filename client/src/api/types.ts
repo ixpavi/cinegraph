@@ -4,6 +4,7 @@ export interface MovieSummary {
   year: number;
   runtime: number;
   plot: string;
+  posterUrl: string | null;
   genres: string[];
   avgRating: number | null;
   ratingCount: number;
@@ -39,6 +40,7 @@ export interface FilmCredit {
   id: string;
   title: string;
   year: number;
+  posterUrl: string | null;
   role?: string;
 }
 
@@ -74,6 +76,7 @@ export interface RatedMovie {
   id: string;
   title: string;
   year: number;
+  posterUrl: string | null;
   score: number;
 }
 
