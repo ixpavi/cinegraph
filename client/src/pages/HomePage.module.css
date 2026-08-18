@@ -1,0 +1,122 @@
+.hero {
+  padding: var(--space-7) 0 var(--space-6);
+  border-bottom: 1px solid var(--surface-border);
+  margin-bottom: var(--space-6);
+}
+
+.kicker {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-3);
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 4vw, 3rem);
+  max-width: 18ch;
+  line-height: 1.08;
+}
+
+.heroSubtitle {
+  margin-top: var(--space-4);
+  max-width: 58ch;
+  color: var(--paper-dim);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--surface-1);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  max-width: 480px;
+}
+
+.searchRow:focus-within {
+  border-color: var(--gold-dim);
+}
+
+.searchIcon {
+  color: var(--paper-faint);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--paper);
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+}
+
+.searchInput::placeholder {
+  color: var(--paper-faint);
+}
+
+.genreRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.resultsHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+  color: var(--paper-faint);
+  font-size: 0.85rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: var(--space-5);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-7);
+}
+
+.pageButton {
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
+  border: 1px solid var(--surface-border);
+  background: var(--surface-1);
+  color: var(--paper);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.pageButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.pageButton:not(:disabled):hover {
+  border-color: var(--gold-dim);
+}
+
+.pageIndicator {
+  font-size: 0.85rem;
+  color: var(--paper-faint);
+}

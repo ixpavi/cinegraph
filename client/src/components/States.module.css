@@ -1,0 +1,70 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-5);
+  color: var(--paper-dim);
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  color: var(--gold);
+  opacity: 0.85;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--paper);
+}
+
+.subtitle {
+  max-width: 42ch;
+  font-size: 0.92rem;
+  color: var(--paper-faint);
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 3px solid var(--surface-2);
+  border-top-color: var(--gold);
+  animation: spin 0.85s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.errorWrap {
+  composes: wrap;
+}
+
+.errorIcon {
+  composes: icon;
+  color: var(--danger);
+}
+
+.retryButton {
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  border-radius: 999px;
+  border: 1px solid var(--surface-border);
+  background: var(--surface-1);
+  color: var(--paper);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.retryButton:hover {
+  border-color: var(--gold-dim);
+  background: var(--surface-2);
+}

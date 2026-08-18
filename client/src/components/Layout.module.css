@@ -1,0 +1,120 @@
+.shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: var(--space-4) var(--space-6);
+  background: rgba(16, 14, 12, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--paper);
+}
+
+.brandMark {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.brandTag {
+  display: none;
+}
+
+@media (min-width: 720px) {
+  .brandTag {
+    display: inline;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--paper-faint);
+    border-left: 1px solid var(--surface-border);
+    padding-left: var(--space-3);
+    margin-left: var(--space-1);
+  }
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.navLink {
+  padding: var(--space-2) var(--space-4);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--paper-dim);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.navLink:hover {
+  background: var(--surface-1);
+  color: var(--paper);
+}
+
+.navLinkActive {
+  background: var(--surface-2);
+  color: var(--gold-strong);
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: var(--space-2);
+}
+
+.statusUp {
+  background: var(--teal);
+  box-shadow: 0 0 8px var(--teal);
+}
+
+.statusDown {
+  background: var(--danger);
+  box-shadow: 0 0 8px var(--danger);
+}
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--paper-faint);
+  padding: 0 var(--space-2);
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-6) var(--space-8);
+}
+
+.footer {
+  border-top: 1px solid var(--surface-border);
+  padding: var(--space-5) var(--space-6);
+  text-align: center;
+  color: var(--paper-faint);
+  font-size: 0.82rem;
+}

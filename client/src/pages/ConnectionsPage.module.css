@@ -1,0 +1,149 @@
+.header {
+  margin-bottom: var(--space-6);
+}
+
+.kicker {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  max-width: 24ch;
+}
+
+.subtitle {
+  margin-top: var(--space-3);
+  color: var(--paper-dim);
+  max-width: 60ch;
+  line-height: 1.6;
+}
+
+.form {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.field {
+  flex: 1;
+  min-width: 220px;
+}
+
+.label {
+  display: block;
+  font-size: 0.76rem;
+  color: var(--paper-faint);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.swapButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface-1);
+  border: 1px solid var(--surface-border);
+  color: var(--paper);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.swapButton:hover {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.submitButton {
+  padding: var(--space-3) var(--space-6);
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--ink);
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submitButton:not(:disabled):hover {
+  background: var(--gold-strong);
+}
+
+.resultWrap {
+  margin-top: var(--space-8);
+}
+
+.resultMeta {
+  color: var(--paper-faint);
+  font-size: 0.88rem;
+  margin-bottom: var(--space-5);
+}
+
+.chain {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: 128px;
+}
+
+.nodeCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--paper);
+  box-shadow: var(--shadow-card);
+  border: 2px solid var(--surface-border);
+}
+
+.nodeMovie {
+  border-radius: var(--radius-md);
+}
+
+.nodeLabel {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.nodeKind {
+  font-size: 0.65rem;
+  color: var(--paper-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.connector {
+  flex: 0 0 32px;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--gold-dim) 0 6px, transparent 6px 12px);
+  margin-bottom: 34px;
+}

@@ -1,0 +1,38 @@
+:root {
+  /* Palette — warm archive/cinema tones, deliberately not another purple-gradient SaaS look */
+  --ink: #100e0c;
+  --surface-0: #17130f;
+  --surface-1: #1e1a15;
+  --surface-2: #26211a;
+  --surface-border: #35302a;
+  --paper: #f4ede1;
+  --paper-dim: #cabfae;
+  --paper-faint: #8d8272;
+  --gold: #e2ac54;
+  --gold-strong: #f0c07a;
+  --gold-dim: #8a6a35;
+  --rust: #c4693f;
+  --teal: #4f9d94;
+  --danger: #d16b62;
+
+  --font-display: "Fraunces", "Iowan Old Style", ui-serif, serif;
+  --font-body: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+
+  --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.4), 0 12px 24px -12px rgba(0, 0, 0, 0.6);
+  --shadow-pop: 0 8px 30px -6px rgba(0, 0, 0, 0.55);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  color-scheme: dark;
+}

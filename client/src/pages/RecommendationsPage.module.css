@@ -1,0 +1,140 @@
+.header {
+  margin-bottom: var(--space-6);
+}
+
+.kicker {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  max-width: 26ch;
+}
+
+.subtitle {
+  margin-top: var(--space-3);
+  color: var(--paper-dim);
+  max-width: 62ch;
+  line-height: 1.6;
+}
+
+.userGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.userCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--surface-1);
+  border: 1px solid var(--surface-border);
+  cursor: pointer;
+  text-align: left;
+}
+
+.userCard:hover {
+  border-color: var(--gold-dim);
+}
+
+.userCardActive {
+  border-color: var(--gold);
+  background: var(--surface-2);
+}
+
+.userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--paper);
+  flex-shrink: 0;
+}
+
+.userName {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.userSub {
+  font-size: 0.72rem;
+  color: var(--paper-faint);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: var(--space-7);
+  margin-top: var(--space-7);
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sectionTitle {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-4);
+}
+
+.ratedList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ratedRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--surface-1);
+  border: 1px solid var(--surface-border);
+  font-size: 0.85rem;
+}
+
+.ratedTitle {
+  font-weight: 600;
+}
+
+.ratedYear {
+  color: var(--paper-faint);
+  font-weight: 400;
+}
+
+.score {
+  color: var(--gold-strong);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.recGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: var(--space-5);
+}
+
+.recWhy {
+  font-size: 0.72rem;
+  color: var(--teal);
+  margin-top: 2px;
+}

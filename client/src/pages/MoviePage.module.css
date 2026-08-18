@@ -1,0 +1,160 @@
+.hero {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-7);
+}
+
+@media (max-width: 640px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+.poster {
+  border-radius: var(--radius-lg);
+  aspect-ratio: 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-pop);
+}
+
+.posterInitials {
+  font-family: var(--font-display);
+  font-size: 3.6rem;
+  font-weight: 600;
+  color: rgba(244, 237, 225, 0.92);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.backLink {
+  color: var(--paper-faint);
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--space-2);
+  width: fit-content;
+}
+
+.backLink:hover {
+  color: var(--gold);
+}
+
+.title {
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  line-height: 1.1;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--paper-dim);
+  font-size: 0.92rem;
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--gold-strong);
+  font-weight: 600;
+}
+
+.genreRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: var(--space-1) 0;
+}
+
+.plot {
+  color: var(--paper-dim);
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 62ch;
+}
+
+.directors {
+  font-size: 0.9rem;
+  color: var(--paper-faint);
+}
+
+.directors a {
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.directors a:hover {
+  color: var(--gold);
+}
+
+.section {
+  margin-top: var(--space-7);
+}
+
+.sectionTitle {
+  font-size: 1.3rem;
+  margin-bottom: var(--space-4);
+}
+
+.castGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-3);
+}
+
+.castCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--surface-1);
+  border: 1px solid var(--surface-border);
+  transition: border-color 0.15s ease;
+}
+
+.castCard:hover {
+  border-color: var(--gold-dim);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--paper);
+  flex-shrink: 0;
+}
+
+.castName {
+  font-size: 0.87rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.castRole {
+  font-size: 0.76rem;
+  color: var(--paper-faint);
+}
+
+.similarGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-4);
+}
