@@ -7,6 +7,10 @@ all backed by **CognoDB**, a managed openCypher/Bolt graph database.
 Built for the Wexa AI take-home assignment ("Build a Graph Database
 Application").
 
+**Live demo:** [cinegraph-web.vercel.app](https://cinegraph-web.vercel.app)
+(API: [cinegraph-api.vercel.app](https://cinegraph-api.vercel.app)) — both
+running against a real CognoDB Cloud instance.
+
 ---
 
 ## Contents
@@ -280,9 +284,32 @@ aggregation folded into the same pass instead of N+1 queries per card.
 
 ## Deployment
 
-The app is deploy-ready but intentionally left unhosted here — a
-`Dockerfile`-free Node/Vite app like this deploys cleanly to Render,
-Railway, Fly.io or a VPS for the API, and Vercel/Netlify/GitHub Pages
-for the static Vite build. Set `NEO4J_URI`/`NEO4J_USER`/`NEO4J_PASSWORD`
-as secrets on the API host and `VITE_API_URL` as a build-time env var
-for the frontend host, pointing at the deployed API's public URL.
+Both halves are deployed on Vercel, each as its own project, both wired
+to the real CognoDB instance:
+
+- **API** — `server/` deploys as a Vercel serverless function
+  (`server/api/index.js` wraps the same Express app used locally —
+  `server/src/app.js` — behind a catch-all rewrite in
+  `server/vercel.json`). `NEO4J_URI` / `NEO4J_USER` / `NEO4J_PASSWORD`
+  are set as encrypted project environment variables, never in the repo.
+- **Frontend** — `client/` deploys as a static Vite build, with
+  `client/vercel.json` rewriting all paths to `index.html` so React
+  Router's client-side routes survive a hard refresh or a direct link.
+  `VITE_API_URL` is a build-time env var pointing at the deployed API.
+
+Nothing about the code differs between local dev and this deployment —
+the same driver, the same queries, the same app.
+
+### A note on the CognoDB free instance
+
+While testing the live deployment, the CognoDB c0 instance briefly
+became TLS-unreachable, and separately, at one point returned ~36,000
+`Person` nodes with none of our `Movie`/`Genre`/`Studio`/`User` data —
+neither of which was caused by anything in this app (the seed script
+was not re-run in between). Re-running `npm run seed` restored the
+correct dataset immediately, since it's idempotent by design. If the
+live demo ever looks empty or wrong when you check it, that's most
+likely the free instance again rather than the application — a reseed
+resolves it in seconds, and the app's error handling (see above) means
+you'll see a clean "database unavailable" state rather than a broken
+page in the meantime.
