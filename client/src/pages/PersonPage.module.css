@@ -22,15 +22,19 @@
   width: 84px;
   height: 84px;
   border-radius: 50%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: var(--shadow-pop);
+  flex-shrink: 0;
+}
+
+.avatarInitials {
   font-family: var(--font-display);
   font-size: 1.8rem;
   font-weight: 600;
   color: var(--paper);
-  box-shadow: var(--shadow-pop);
-  flex-shrink: 0;
 }
 
 .name {
@@ -145,12 +149,18 @@
   width: 26px;
   height: 26px;
   border-radius: 50%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+.collabAvatarInitials {
   font-size: 0.65rem;
   font-weight: 700;
   font-family: var(--font-display);
+  color: rgba(244, 237, 225, 0.92);
 }
 
 .collabCount {

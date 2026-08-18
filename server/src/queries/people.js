@@ -31,7 +31,7 @@ export async function getPersonDetail(id) {
       collaborator
     WITH p, actedIn, directed, collaborator, count(collaborator) AS collabCount
     ORDER BY collabCount DESC
-    WITH p, actedIn, directed, collect({ person: collaborator { .id, .name }, count: collabCount })[0..8] AS collaborators
+    WITH p, actedIn, directed, collect({ person: collaborator { .id, .name, .photoUrl }, count: collabCount })[0..8] AS collaborators
     RETURN p, actedIn, directed, collaborators
   `;
   const [row] = await runQuery(cypher, { id });
@@ -56,8 +56,8 @@ export async function shortestPathBetweenPeople(fromId, toId) {
     MATCH path = shortestPath((a)-[:ACTED_IN|DIRECTED*..8]-(b))
     RETURN [n IN nodes(path) |
       CASE
-        WHEN n:Person THEN { kind: 'Person', id: n.id, name: n.name }
-        WHEN n:Movie THEN { kind: 'Movie', id: n.id, name: n.title }
+        WHEN n:Person THEN { kind: 'Person', id: n.id, name: n.name, photoUrl: n.photoUrl }
+        WHEN n:Movie THEN { kind: 'Movie', id: n.id, name: n.title, posterUrl: n.posterUrl }
       END
     ] AS steps,
     length(path) AS hops

@@ -5,7 +5,6 @@ import { LoadingState, ErrorState, EmptyState } from "../components/States";
 import { GenreChip } from "../components/GenreChip";
 import { MovieCard } from "../components/MovieCard";
 import { Poster } from "../components/Poster";
-import { posterStyle, initials } from "../lib/poster";
 import styles from "./MoviePage.module.css";
 
 export function MoviePage() {
@@ -76,9 +75,13 @@ export function MoviePage() {
           <div className={styles.castGrid}>
             {m.cast.map((c) => (
               <Link key={c.id} to={`/people/${c.id}`} className={styles.castCard}>
-                <span className={styles.avatar} style={posterStyle(c.id)}>
-                  {initials(c.name)}
-                </span>
+                <Poster
+                  id={c.id}
+                  title={c.name}
+                  posterUrl={c.photoUrl}
+                  className={styles.avatar}
+                  initialsClassName={styles.avatar}
+                />
                 <span>
                   <div className={styles.castName}>{c.name}</div>
                   <div className={styles.castRole}>{c.role}</div>

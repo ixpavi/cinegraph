@@ -55,8 +55,8 @@ export async function getMovieDetail(id) {
     OPTIONAL MATCH (:User)-[r:RATED]->(m)
     RETURN m,
       collect(DISTINCT g.name) AS genres,
-      collect(DISTINCT director { .id, .name }) AS directors,
-      collect(DISTINCT actor { .id, .name, role: role.role }) AS cast,
+      collect(DISTINCT director { .id, .name, .photoUrl }) AS directors,
+      collect(DISTINCT actor { .id, .name, .photoUrl, role: role.role }) AS cast,
       collect(DISTINCT studio.name)[0] AS studio,
       avg(r.score) AS avgRating,
       count(r) AS ratingCount

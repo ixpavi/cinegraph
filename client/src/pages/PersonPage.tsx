@@ -3,7 +3,6 @@ import { api } from "../api/client";
 import { useAsync } from "../lib/useAsync";
 import { LoadingState, ErrorState, EmptyState } from "../components/States";
 import { Poster } from "../components/Poster";
-import { posterStyle, initials } from "../lib/poster";
 import styles from "./PersonPage.module.css";
 
 export function PersonPage() {
@@ -23,9 +22,13 @@ export function PersonPage() {
         ← Back to browse
       </Link>
       <div className={styles.header}>
-        <span className={styles.avatar} style={posterStyle(p.id)}>
-          {initials(p.name)}
-        </span>
+        <Poster
+          id={p.id}
+          title={p.name}
+          posterUrl={p.photoUrl ?? null}
+          className={styles.avatar}
+          initialsClassName={styles.avatarInitials}
+        />
         <div>
           <h1 className={styles.name}>{p.name}</h1>
           <p className={styles.subline}>
@@ -96,9 +99,13 @@ export function PersonPage() {
           <div className={styles.collabList}>
             {p.collaborators.map((c) => (
               <Link key={c.person.id} to={`/people/${c.person.id}`} className={styles.collabCard}>
-                <span className={styles.collabAvatar} style={posterStyle(c.person.id)}>
-                  {initials(c.person.name)}
-                </span>
+                <Poster
+                  id={c.person.id}
+                  title={c.person.name}
+                  posterUrl={c.person.photoUrl ?? null}
+                  className={styles.collabAvatar}
+                  initialsClassName={styles.collabAvatarInitials}
+                />
                 {c.person.name}
                 <span className={styles.collabCount}>×{c.count}</span>
               </Link>

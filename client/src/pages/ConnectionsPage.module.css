@@ -113,6 +113,7 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,8 +124,30 @@
   border: 2px solid var(--surface-border);
 }
 
-.nodeMovie {
-  border-radius: var(--radius-md);
+.nodeCircleInitials {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--paper);
+}
+
+.nodePoster {
+  width: 56px;
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-card);
+  border: 2px solid var(--surface-border);
+}
+
+.nodePosterInitials {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.7rem;
+  color: rgba(244, 237, 225, 0.92);
 }
 
 .nodeLabel {

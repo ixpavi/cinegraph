@@ -39,14 +39,28 @@ export function dbStatus() {
 /**
  * Run a parameterised Cypher query in a managed session and return plain records.
  * Never string-concatenate Cypher — always pass `params`.
+ *
+ * Retries once on driver-flagged transient errors (`retriable: true`) —
+ * the free CognoDB instance backing this project has been observed
+ * dropping connections under load ("Connection was closed by server",
+ * `code: ServiceUnavailable`), which the driver correctly marks
+ * retriable; a fresh session on retry gets a healthy pooled connection.
+ * See the README's Deployment section.
  */
-export async function runQuery(cypher, params = {}, { database } = {}) {
-  const session = driver.session(database ? { database } : undefined);
-  try {
-    const result = await session.run(cypher, params);
-    return result.records.map((r) => r.toObject());
-  } finally {
-    await session.close();
+export async function runQuery(cypher, params = {}, { database, attempts = 4 } = {}) {
+  for (let i = 1; i <= attempts; i++) {
+    const session = driver.session(database ? { database } : undefined);
+    try {
+      const result = await session.run(cypher, params);
+      return result.records.map((r) => r.toObject());
+    } catch (err) {
+      if (!err.retriable || i === attempts) throw err;
+      const delay = 400 * i;
+      console.warn(`[db] Transient query error (attempt ${i}/${attempts}), retrying in ${delay}ms: ${err.message}`);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    } finally {
+      await session.close();
+    }
   }
 }
 

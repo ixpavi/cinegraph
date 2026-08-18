@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { dbStatus } from "./db/neo4j.js";
+import { ensureSeeded } from "./seed/ensureSeeded.js";
 import { moviesRouter } from "./routes/movies.js";
 import { peopleRouter } from "./routes/people.js";
 import { recommendationsRouter } from "./routes/recommendations.js";
@@ -13,7 +14,7 @@ app.use(express.json());
 
 // Every request checks the last-known DB connectivity state and fails fast
 // with a clear message instead of hanging or throwing a raw driver error.
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   if (req.path === "/api/health") return next();
   const status = dbStatus();
   if (!status.connected) {
@@ -22,6 +23,9 @@ app.use((req, res, next) => {
       detail: status.error || "Graph database connection has not been established yet.",
     });
   }
+  // Self-heals if the (free, occasionally unstable) CognoDB instance has
+  // reverted to unrelated data — see src/seed/ensureSeeded.js.
+  await ensureSeeded();
   next();
 });
 

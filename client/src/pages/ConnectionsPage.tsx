@@ -4,7 +4,7 @@ import { api, ApiError } from "../api/client";
 import type { PathResult, PersonSummary } from "../api/types";
 import { PersonPicker } from "../components/PersonPicker";
 import { LoadingState, ErrorState, EmptyState } from "../components/States";
-import { posterStyle, initials } from "../lib/poster";
+import { Poster } from "../components/Poster";
 import styles from "./ConnectionsPage.module.css";
 
 type Status = { kind: "idle" } | { kind: "loading" } | { kind: "error"; message: string } | { kind: "success"; data: PathResult };
@@ -101,12 +101,23 @@ export function ConnectionsPage() {
                     to={step.kind === "Person" ? `/people/${step.id}` : `/movies/${step.id}`}
                     className={styles.node}
                   >
-                    <span
-                      className={step.kind === "Movie" ? `${styles.nodeCircle} ${styles.nodeMovie}` : styles.nodeCircle}
-                      style={posterStyle(step.id)}
-                    >
-                      {initials(step.name)}
-                    </span>
+                    {step.kind === "Person" ? (
+                      <Poster
+                        id={step.id}
+                        title={step.name}
+                        posterUrl={step.photoUrl ?? null}
+                        className={styles.nodeCircle}
+                        initialsClassName={styles.nodeCircleInitials}
+                      />
+                    ) : (
+                      <Poster
+                        id={step.id}
+                        title={step.name}
+                        posterUrl={step.posterUrl ?? null}
+                        className={styles.nodePoster}
+                        initialsClassName={styles.nodePosterInitials}
+                      />
+                    )}
                     <span className={styles.nodeLabel}>{step.name}</span>
                     <span className={styles.nodeKind}>{step.kind}</span>
                   </Link>

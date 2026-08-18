@@ -17,12 +17,14 @@ export interface SimilarMovie extends MovieSummary {
 export interface CastMember {
   id: string;
   name: string;
+  photoUrl: string | null;
   role: string;
 }
 
 export interface Director {
   id: string;
   name: string;
+  photoUrl: string | null;
 }
 
 export interface MovieDetail extends MovieSummary {
@@ -34,6 +36,7 @@ export interface MovieDetail extends MovieSummary {
 export interface PersonSummary {
   id: string;
   name: string;
+  photoUrl?: string | null;
 }
 
 export interface FilmCredit {
@@ -59,6 +62,8 @@ export interface PathStep {
   kind: "Person" | "Movie";
   id: string;
   name: string;
+  photoUrl?: string | null;
+  posterUrl?: string | null;
 }
 
 export interface PathResult {
