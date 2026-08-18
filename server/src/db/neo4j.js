@@ -37,6 +37,21 @@ export function dbStatus() {
 }
 
 /**
+ * Marks connectivity as down outside the verifyConnectivity() poll loop —
+ * called when a live query exhausts its retries, so a mid-request drop is
+ * reflected immediately instead of waiting for the next background check
+ * (up to 10s locally) or, on a serverless instance that warms up once and
+ * reuses that same "verified" flag for the instance's whole lifetime,
+ * potentially never. Without this, /api/health can report `connected:
+ * true` from an earlier successful check while real queries are actively
+ * failing on an unstable database.
+ */
+function markDown(err) {
+  verified = false;
+  lastError = err.message;
+}
+
+/**
  * Run a parameterised Cypher query in a managed session and return plain records.
  * Never string-concatenate Cypher — always pass `params`.
  *
@@ -54,7 +69,10 @@ export async function runQuery(cypher, params = {}, { database, attempts = 4 } =
       const result = await session.run(cypher, params);
       return result.records.map((r) => r.toObject());
     } catch (err) {
-      if (!err.retriable || i === attempts) throw err;
+      if (!err.retriable || i === attempts) {
+        markDown(err);
+        throw err;
+      }
       const delay = 400 * i;
       console.warn(`[db] Transient query error (attempt ${i}/${attempts}), retrying in ${delay}ms: ${err.message}`);
       await new Promise((resolve) => setTimeout(resolve, delay));
